@@ -41,6 +41,8 @@ Necesita bash, Python 3.11+, Node 20+, git y curl. Mata sus procesos y borra sus
 
 ## Notas
 - Bifrost queda solo en 127.0.0.1 (puerto 4010). No lo expongas.
+- Sin governance (virtual keys), cualquier programa de tu PC, o una página web abierta en tu navegador, puede usar la API y el panel de Bifrost en 127.0.0.1 y gastar tus llaves. Si la PC la usa más gente, activa governance en Bifrost y pon una virtual key en `DELEGATE_BIFROST_VK_CODE`.
+- Las versiones van fijadas: npm `@maximhq/bifrost@1.6.3` y Docker `maximhq/bifrost:v2.2.4`. Sube de versión a propósito, no por accidente.
 - Las llaves van solo por variables de entorno, nunca dentro del JSON.
 - El delegate ejecuta comandos de shell en tu carpeta de trabajo sin sandbox: usalo con agentes de confianza.
 - Esquema de config de Bifrost: https://github.com/maximhq/bifrost/blob/main/transports/config.schema.json

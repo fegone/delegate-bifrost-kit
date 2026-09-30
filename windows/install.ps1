@@ -42,9 +42,9 @@ Copy-Item bifrost\config.json bifrost-data\config.json -Force
 # Bifrost solo en 127.0.0.1
 if ($UseDocker) {
   docker rm -f bifrost 2>$null | Out-Null
-  docker run -d --name bifrost -p "127.0.0.1:${Port}:8080" -e APP_HOST=0.0.0.0 --env-file .env -v "${PWD}\bifrost-data:/app/data" maximhq/bifrost | Out-Null
+  docker run -d --name bifrost -p "127.0.0.1:${Port}:8080" -e APP_HOST=0.0.0.0 --env-file .env -v "${PWD}\bifrost-data:/app/data" maximhq/bifrost:v2.2.4 | Out-Null
 } else {
-  Start-Process npx.cmd -ArgumentList '-y','@maximhq/bifrost','-host','127.0.0.1','-port',"$Port",'-app-dir',"$Root\bifrost-data" -WindowStyle Minimized
+  Start-Process npx.cmd -ArgumentList '-y','@maximhq/bifrost@1.6.3','-host','127.0.0.1','-port',"$Port",'-app-dir',"$Root\bifrost-data" -WindowStyle Minimized
 }
 
 # Delegate fijado + venv

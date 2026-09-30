@@ -59,7 +59,7 @@ p["generic-openai"]["network_config"]["base_url"] = m + "/generic/v1"
 json.dump(c, open(os.environ["OUT"], "w"), indent=1)
 PYEOF
 ZAI_API_KEY=dummy-zai DEEPSEEK_API_KEY=dummy-deepseek GENERIC_OPENAI_API_KEY=dummy-generic \
-  npx -y @maximhq/bifrost -host 127.0.0.1 -port "$BIFROST_PORT" -app-dir "$T/app" \
+  npx -y @maximhq/bifrost@1.6.3 -host 127.0.0.1 -port "$BIFROST_PORT" -app-dir "$T/app" \
   > "$T/bifrost.log" 2>&1 & PIDS+=($!)
 
 for _ in $(seq 1 120); do

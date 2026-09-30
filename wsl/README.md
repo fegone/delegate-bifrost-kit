@@ -9,10 +9,10 @@ cp bifrost/config.example.json bifrost/config.json
 set -a; . ./.env; set +a
 
 # 1) Bifrost, solo en 127.0.0.1:4010 (elige una)
-npx -y @maximhq/bifrost -host 127.0.0.1 -port 4010 -app-dir ./bifrost-data &
+npx -y @maximhq/bifrost@1.6.3 -host 127.0.0.1 -port 4010 -app-dir ./bifrost-data &
 #  o Docker:
 # docker run -d --name bifrost -p 127.0.0.1:4010:8080 -e APP_HOST=0.0.0.0 \
-#   --env-file .env -v "$PWD/bifrost-data:/app/data" maximhq/bifrost
+#   --env-file .env -v "$PWD/bifrost-data:/app/data" maximhq/bifrost:v2.2.4
 cp bifrost/config.json bifrost-data/config.json   # con npx; reinicia Bifrost despues
 
 # 2) Delegate fijado al commit
