@@ -9,10 +9,10 @@
           "weight": 1,
           "models": ["*"],
           "aliases": {
-            "glm-coding-plan": "glm-5.2",
-            "glm-coding-plan-think": "glm-5.2",
-            "glm-coding-plan-max": "glm-5.2",
-            "glm-5-3-flash": "glm-5.2"
+            "glm-coding-plan": "glm-5.3",
+            "glm-coding-plan-think": "glm-5.3",
+            "glm-coding-plan-max": "glm-5.3",
+            "glm-5-3-flash": "glm-5.3-flash"
           }
         }
       ],

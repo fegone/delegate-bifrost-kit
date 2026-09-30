@@ -31,4 +31,4 @@ claude mcp add delegate-local --scope user \
   -- "$PWD/.venv/bin/python" "$PWD/delegate/server.py"
 ```
 
-Reinicia Claude Code. Las virtual keys van vacias porque esta config no activa governance; si la activas, pon ahi tus llaves virtuales. Para el alias generico usa `generic-model`.
+Reinicia Claude Code. Las virtual keys van vacias porque esta config no activa governance; si la activas, pon ahi tus llaves virtuales. Para el alias generico usa `generic-model`. Comprueba todo el camino con `bash tests/e2e_mac_linux.sh` (ver README).
