@@ -56,7 +56,7 @@ git -C delegate fetch --quiet; git -C delegate checkout --quiet $Sha
 # Comando de registro
 $venvPy = Join-Path $Root '.venv\Scripts\python.exe'
 $server = Join-Path $Root 'delegate\server.py'
-$pathEnv = if ($gitBin) { "--env \"PATH=$gitBin;$env:PATH\"" } else { '' }
-$cmd = "claude mcp add delegate-local --scope user --env DELEGATE_GATEWAY=bifrost --env DELEGATE_BIFROST_URL=http://127.0.0.1:$Port --env DELEGATE_BIFROST_VK_LOCAL= --env DELEGATE_BIFROST_VK_CODE= --env DELEGATE_LOCAL_MODEL=glm-coding-plan $pathEnv -- \"$venvPy\" \"$server\""
+$pathEnv = if ($gitBin) { "--env `"PATH=$gitBin;$env:PATH`"" } else { '' }
+$cmd = "claude mcp add delegate-local --scope user --env DELEGATE_GATEWAY=bifrost --env DELEGATE_BIFROST_URL=http://127.0.0.1:$Port --env DELEGATE_BIFROST_VK_LOCAL= --env DELEGATE_BIFROST_VK_CODE= --env DELEGATE_LOCAL_MODEL=glm-coding-plan $pathEnv -- `"$venvPy`" `"$server`""
 Set-Content windows\claude-mcp-add.txt $cmd
 Write-Host "Listo. Pega este comando y reinicia Claude Code:`n`n$cmd"
