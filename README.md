@@ -2,7 +2,7 @@
 
 Kit para correr el delegate de Claude Code (MCP `delegate-local`) contra **Bifrost oficial** (maximhq/bifrost) en vez de LiteLLM. Claude Code le manda tareas a modelos como GLM y DeepSeek, y Bifrost hace de puerta local en 127.0.0.1.
 
-Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit lo fija al commit `2c43bdb17402ec277bf34fe088f5717f711e7a95`.
+Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit lo fija al commit `916fff06243b4f7b273a6c893ffa56c31c71745a`.
 
 ## Requisitos
 - Windows 11 (la ruta recomendada es WSL2)

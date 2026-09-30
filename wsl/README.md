@@ -17,7 +17,7 @@ cp bifrost/config.json bifrost-data/config.json   # con npx; reinicia Bifrost de
 
 # 2) Delegate fijado al commit
 git clone https://github.com/fegone/claude-code-delegate-local.git delegate
-git -C delegate checkout 2c43bdb17402ec277bf34fe088f5717f711e7a95
+git -C delegate checkout 916fff06243b4f7b273a6c893ffa56c31c71745a
 python3 -m venv .venv && . .venv/bin/activate
 pip install "fastmcp>=3.4.4" "httpx>=0.28.1"
 

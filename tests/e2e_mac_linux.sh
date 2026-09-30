@@ -11,7 +11,7 @@
 #   BIFROST_PORT / MOCK_PORT           default 14010 / 14011
 set -euo pipefail
 
-SHA=2c43bdb17402ec277bf34fe088f5717f711e7a95
+SHA=916fff06243b4f7b273a6c893ffa56c31c71745a
 KIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BIFROST_PORT="${BIFROST_PORT:-14010}"
 MOCK_PORT="${MOCK_PORT:-14011}"
