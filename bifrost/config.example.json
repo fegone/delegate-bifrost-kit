@@ -1,0 +1,66 @@
+{
+  "$schema": "https://www.getbifrost.ai/schema",
+  "providers": {
+    "anthropic": {
+      "keys": [
+        {
+          "name": "zai-coding-plan",
+          "value": "env.ZAI_API_KEY",
+          "weight": 1,
+          "models": ["*"],
+          "aliases": {
+            "glm-coding-plan": "glm-5.2",
+            "glm-coding-plan-think": "glm-5.2",
+            "glm-coding-plan-max": "glm-5.2",
+            "glm-5-3-flash": "glm-5.2"
+          }
+        }
+      ],
+      "network_config": {
+        "base_url": "https://api.z.ai/api/anthropic",
+        "default_request_timeout_in_seconds": 300,
+        "max_retries": 2
+      }
+    },
+    "deepseek": {
+      "keys": [
+        {
+          "name": "deepseek",
+          "value": "env.DEEPSEEK_API_KEY",
+          "weight": 1,
+          "models": ["*"],
+          "aliases": {
+            "deepseek-v4-flash": "deepseek-v4-flash",
+            "deepseek-v4-flash-max": "deepseek-v4-flash",
+            "deepseek-v4-pro": "deepseek-v4-pro",
+            "deepseek-v4-pro-max": "deepseek-v4-pro"
+          }
+        }
+      ],
+      "network_config": {
+        "default_request_timeout_in_seconds": 300,
+        "max_retries": 2
+      }
+    },
+    "generic-openai": {
+      "keys": [
+        {
+          "name": "generic-openai",
+          "value": "env.GENERIC_OPENAI_API_KEY",
+          "weight": 1,
+          "models": ["*"],
+          "aliases": {
+            "generic-model": "CAMBIA-ESTO-por-el-id-del-modelo"
+          }
+        }
+      ],
+      "network_config": {
+        "base_url": "https://CAMBIA-ESTO.example.com/v1",
+        "default_request_timeout_in_seconds": 300
+      },
+      "custom_provider_config": {
+        "base_provider_type": "openai"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+.env
+.venv/
+bifrost-data/
+delegate/
+bifrost/config.json
+windows/claude-mcp-add.txt
