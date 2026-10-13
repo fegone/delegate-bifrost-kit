@@ -1,7 +1,7 @@
 #Requires -Version 7
 param([switch]$UseDocker, [int]$Port = 4010)
 $ErrorActionPreference = 'Stop'
-$Sha = 'e43f506078fd95de82bbd3613aea0c789cefb05b'
+$Sha = '25dbf8d511ebc87a84e8f49098e91ddbb934f9b3'
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 

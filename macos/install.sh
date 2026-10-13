@@ -6,7 +6,7 @@
 #   BIFROST_PORT=4010    port used in the printed command
 set -euo pipefail
 
-SHA=e43f506078fd95de82bbd3613aea0c789cefb05b
+SHA=25dbf8d511ebc87a84e8f49098e91ddbb934f9b3
 KIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DEST="${DEST:-$KIT}"
 PORT="${BIFROST_PORT:-4010}"
