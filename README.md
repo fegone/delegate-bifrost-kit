@@ -4,6 +4,8 @@ Kit para correr el delegate de Claude Code (MCP `delegate-local`) contra **Bifro
 
 Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit lo fija al commit `e43f506078fd95de82bbd3613aea0c789cefb05b`.
 
+Para qué sirve el delegate, qué modelos van por Bifrost y cuáles no, y cómo agregar otro modelo: `GUIA.md`.
+
 ## Requisitos
 - macOS en Apple Silicon (`macos/README.md`) o Windows 11 con WSL2 (`wsl/README.md`). Windows nativo no funciona, ver Novedades
 - Node 20+ o Docker Desktop, para Bifrost
