@@ -32,9 +32,22 @@ Cada modelo entra por uno de estos caminos.
 
 ## Gemini y Antigravity
 
-Hoy hay una sola forma de usar Gemini con el delegate. Se crea una llave en Google AI Studio y se agrega Gemini como proveedor en Bifrost (sección siguiente). Eso se paga por uso y no entra en la suscripción de Google.
+Hay dos formas de usar Gemini con el delegate.
 
-Usar Gemini 3.8 Flash con la suscripción, a través del CLI de Antigravity (`agy`), todavía no existe en el delegate. Lo estamos probando nosotros. Google publica `agy` por Homebrew (`brew install --cask antigravity-cli`), firmado por Google, pero el 13 de octubre el binario no venía notarizado y macOS lo bloquea al abrirlo. Cuando el camino funcione de punta a punta lo agregamos al delegate igual que Codex y actualizamos este repo. Con un `git pull` les llega.
+**Con llave de API.** Se crea una llave en Google AI Studio y se agrega Gemini como proveedor en Bifrost (sección siguiente). Se paga por uso y no entra en la suscripción de Google.
+
+**Con la suscripción, por el CLI de Antigravity (`agy`).** Desde el commit `ff4b4a5` el delegate trae `delegate_to_gemini`, `submit_gemini`, `poll_gemini` y `cancel_gemini`, que corren Gemini 3.8 Flash (low, medium o high) con tu plan de Google.
+
+1. Instala el CLI con `brew install --cask antigravity-cli`. Revisa la firma con `spctl -a -vv -t open --context context:primary-signature "$(readlink -f "$(which agy)")"`. En nuestra Mac la versión 1.3.3 salió firmada por Google pero sin notarizar y macOS la bloqueó al abrirla. En la Mac de Edgar salió notarizada. Si te la bloquea, la decisión de abrirla es tuya.
+2. Corre `agy` una vez en una terminal y entra con tu cuenta de Google. `agy models` tiene que listar `gemini-3.8-flash-low`.
+3. Agrega `DELEGATE_GEMINI_ALLOW_DANGER=1` al env del MCP y reinicia Claude Code. Sin esa variable las herramientas de Gemini se niegan a correr.
+
+Gemini corre dentro de una jaula de macOS (`sandbox-exec`). Solo puede leer la carpeta de trabajo, `~/.gemini`, el llavero en solo lectura y las rutas del sistema. No ve el resto de `$HOME`, `/Users` ni `/Volumes`, y no puede abrir el navegador. Lo que sigue abierto es la red de salida y el programa `security` del llavero.
+
+Dos límites de `agy`:
+
+- En modo `-p` un solo comando rechazado corta toda la corrida.
+- Por SSH no funciona, porque la sesión de Google vive en el llavero de la sesión gráfica. Úsalo en la Mac con sesión abierta.
 
 ## Agregar otro modelo por llave de API
 
@@ -86,5 +99,6 @@ No hace falta tocar Bifrost para esto.
 - Bifrost escucha solo en 127.0.0.1. No lo expongan a la red.
 - Sin virtual keys, cualquier programa de esa máquina, o una página abierta en el navegador, puede usar Bifrost y gastar sus llaves. Si la máquina la usa más gente, activen governance en Bifrost y pongan la virtual key en `DELEGATE_BIFROST_VK_CODE`.
 - El delegate corre comandos en la carpeta de trabajo sin sandbox. Úsenlo solo en repos y con modelos de confianza.
-- A un modelo externo le sale todo lo que esté en la carpeta. No lo usen con datos de clientes ni de pacientes.
+- `delegate_to_local_agent` y `delegate_batch` no tienen sandbox. `run_bash` corre con tu usuario y puede leer todo tu `$HOME`, incluidos `~/.ssh` y `~/.codex/auth.json`, y lo que lea se va al proveedor del modelo. Úsalos solo en repos de confianza y nunca con datos de clientes ni de pacientes. Gemini por `agy` es la excepción, porque corre en su jaula.
+- **Failover automático.** Si las 6 plazas de un modelo están ocupadas, el delegate pasa la tarea a otro de su cadena, por ejemplo de `glm-coding-plan` a `qwen-3-8-max` y luego a DeepSeek, sin preguntarte. El resultado dice qué modelo la sirvió. Los modelos locales y Codex nunca cambian de modelo.
 - Windows nativo no funciona. En Windows usen WSL2.
