@@ -1,7 +1,7 @@
 #Requires -Version 7
 param([switch]$UseDocker, [int]$Port = 4010)
 $ErrorActionPreference = 'Stop'
-$Sha = '916fff06243b4f7b273a6c893ffa56c31c71745a'
+$Sha = 'e43f506078fd95de82bbd3613aea0c789cefb05b'
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 
@@ -44,7 +44,7 @@ if ($UseDocker) {
   docker rm -f bifrost 2>$null | Out-Null
   docker run -d --name bifrost -p "127.0.0.1:${Port}:8080" -e APP_HOST=0.0.0.0 --env-file .env -v "${PWD}\bifrost-data:/app/data" maximhq/bifrost:v2.2.4 | Out-Null
 } else {
-  Start-Process npx.cmd -ArgumentList '-y','@maximhq/bifrost@1.6.3','-host','127.0.0.1','-port',"$Port",'-app-dir',"$Root\bifrost-data" -WindowStyle Minimized
+  Start-Process npx.cmd -ArgumentList '-y','@maximhq/bifrost@1.6.3','--transport-version','v2.2.4','-host','127.0.0.1','-port',"$Port",'-app-dir',"$Root\bifrost-data" -WindowStyle Minimized
 }
 
 # Delegate fijado + venv

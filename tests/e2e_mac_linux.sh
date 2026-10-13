@@ -11,7 +11,7 @@
 #   BIFROST_PORT / MOCK_PORT           default 14010 / 14011
 set -euo pipefail
 
-SHA=916fff06243b4f7b273a6c893ffa56c31c71745a
+SHA=e43f506078fd95de82bbd3613aea0c789cefb05b
 KIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BIFROST_PORT="${BIFROST_PORT:-14010}"
 MOCK_PORT="${MOCK_PORT:-14011}"
@@ -59,7 +59,7 @@ p["generic-openai"]["network_config"]["base_url"] = m + "/generic/v1"
 json.dump(c, open(os.environ["OUT"], "w"), indent=1)
 PYEOF
 ZAI_API_KEY=dummy-zai DEEPSEEK_API_KEY=dummy-deepseek GENERIC_OPENAI_API_KEY=dummy-generic \
-  npx -y @maximhq/bifrost@1.6.3 -host 127.0.0.1 -port "$BIFROST_PORT" -app-dir "$T/app" \
+  npx -y @maximhq/bifrost@1.6.3 --transport-version v2.2.4 -host 127.0.0.1 -port "$BIFROST_PORT" -app-dir "$T/app" \
   > "$T/bifrost.log" 2>&1 & PIDS+=($!)
 
 for _ in $(seq 1 120); do

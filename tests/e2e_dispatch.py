@@ -8,6 +8,7 @@ returned success and the mock's answer text.
 import asyncio, importlib.util, json, sys
 
 delegate_dir, workdir, *models = sys.argv[1:]
+sys.path.insert(0, delegate_dir)  # server.py imports sibling modules (dsh_jobs); python does this itself when run as a script
 spec = importlib.util.spec_from_file_location("delegate_server", f"{delegate_dir}/server.py")
 srv = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(srv)

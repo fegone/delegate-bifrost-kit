@@ -9,7 +9,7 @@ cp bifrost/config.example.json bifrost/config.json
 set -a; . ./.env; set +a
 
 # 1) Bifrost, solo en 127.0.0.1:4010 (elige una)
-npx -y @maximhq/bifrost@1.6.3 -host 127.0.0.1 -port 4010 -app-dir ./bifrost-data &
+npx -y @maximhq/bifrost@1.6.3 --transport-version v2.2.4 -host 127.0.0.1 -port 4010 -app-dir ./bifrost-data &
 #  o Docker:
 # docker run -d --name bifrost -p 127.0.0.1:4010:8080 -e APP_HOST=0.0.0.0 \
 #   --env-file .env -v "$PWD/bifrost-data:/app/data" maximhq/bifrost:v2.2.4
@@ -17,7 +17,7 @@ cp bifrost/config.json bifrost-data/config.json   # con npx; reinicia Bifrost de
 
 # 2) Delegate fijado al commit
 git clone https://github.com/fegone/claude-code-delegate-local.git delegate
-git -C delegate checkout 916fff06243b4f7b273a6c893ffa56c31c71745a
+git -C delegate checkout e43f506078fd95de82bbd3613aea0c789cefb05b
 python3 -m venv .venv && . .venv/bin/activate
 pip install "fastmcp>=3.4.4" "httpx>=0.28.1"
 
