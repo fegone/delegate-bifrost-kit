@@ -5,7 +5,7 @@ Kit para correr el delegate de Claude Code (MCP `delegate-local`) contra **Bifro
 Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit lo fija al commit `e43f506078fd95de82bbd3613aea0c789cefb05b`.
 
 ## Requisitos
-- Windows 11 (la ruta recomendada es WSL2)
+- Windows 11 con WSL2 (Windows nativo no funciona, ver Novedades)
 - Node 20+ o Docker Desktop, para Bifrost
 - Python 3.11+
 - Git for Windows o WSL2
@@ -19,10 +19,11 @@ Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit l
 5. Pidele a Claude Code que use `delegate_to_local_agent` con el modelo `glm-coding-plan` y confirma que responde.
 
 ## Novedades del 2026-10-13
-- Delegate subido de `916fff0` a `e43f506`. Instalacion igual: mismas dependencias (`fastmcp`, `httpx`) y mismas variables. No hay variables nuevas obligatorias.
-- Herramientas nuevas que **puedes ignorar**: `submit_codex` / `poll_codex` / `cancel_codex` (trabajan con el Codex CLI y un plan de ChatGPT; sin el CLI responden "codex binary no encontrado") y `submit_dsh` / `poll_dsh` / `cancel_dsh` (necesitan un lanzador y una lista de modelos que este kit no trae; sin ellos responden que la lista no esta disponible). Ninguna impide que el delegate arranque. Lo tuyo sigue siendo `delegate_to_local_agent` y `delegate_batch`.
-- `DELEGATE_GATEWAY_FILE` es opcional y no la necesitas: sigue usando `DELEGATE_GATEWAY=bifrost` como hasta ahora.
-- Bifrost: se queda en npm `1.6.3` y Docker `v2.2.4` (la mas nueva con 14 dias o mas de publicada). La config de ejemplo no cambia. Ahora el comando npx lleva `--transport-version v2.2.4` (ver Notas).
+- El delegate sube de `916fff0` a `e43f506`. Se instala igual, con las mismas dependencias (`fastmcp`, `httpx`) y las mismas variables. No hay variables nuevas obligatorias.
+- **Windows nativo no funciona.** El delegate importa `fcntl`, que solo existe en Linux y macOS, y en Windows nativo el MCP se cae al arrancar. Esto ya pasaba con el commit anterior. Usa WSL2 (`wsl/README.md`). `windows/install.ps1` queda en el repo, pero no lo uses hasta nuevo aviso.
+- Hay seis herramientas nuevas que **puedes ignorar**. `submit_codex`, `poll_codex` y `cancel_codex` trabajan con el Codex CLI y un plan de ChatGPT. Sin el CLI responden "codex binary no encontrado". `submit_dsh`, `poll_dsh` y `cancel_dsh` necesitan un lanzador que este kit no trae y responden que la lista de modelos no está disponible. Ninguna impide que el delegate arranque. Lo tuyo sigue siendo `delegate_to_local_agent` y `delegate_batch`.
+- `DELEGATE_GATEWAY_FILE` es opcional y no la necesitas. Sigue con `DELEGATE_GATEWAY=bifrost` como hasta ahora.
+- Bifrost se queda en npm `1.6.3` y Docker `v2.2.4`, la versión más nueva con 14 días o más de publicada. La config de ejemplo no cambia. El comando npx ahora lleva `--transport-version v2.2.4` (detalle en Notas).
 
 ## Ids de modelo (ajusta al id vigente)
 Los ids del lado del proveedor estan en `bifrost/config.example.json` (campo `aliases`: alias del delegate -> id real). Verificados contra la documentacion publica de cada proveedor el 2026-10-13 (sin cambios desde el 2026-09-30):
@@ -49,7 +50,7 @@ Necesita bash, Python 3.11+, Node 20+, git y curl. Mata sus procesos y borra sus
 - Bifrost queda solo en 127.0.0.1 (puerto 4010). No lo expongas.
 - Sin governance (virtual keys), cualquier programa de tu PC, o una página web abierta en tu navegador, puede usar la API y el panel de Bifrost en 127.0.0.1 y gastar tus llaves. Si la PC la usa más gente, activa governance en Bifrost y pon una virtual key en `DELEGATE_BIFROST_VK_CODE`.
 - Las versiones van fijadas: npm `@maximhq/bifrost@1.6.3` con `--transport-version v2.2.4` y Docker `maximhq/bifrost:v2.2.4`. Sube de versión a propósito, no por accidente.
-- El paquete npm `1.6.3` es solo un lanzador: si no le pasas `--transport-version`, baja el Bifrost mas reciente (el 2026-10-13 era v2.3.0, que exige virtual key y rompe esta config sin governance). Por eso el flag va en todos los comandos del kit; no lo quites.
+- El paquete npm `1.6.3` es solo un lanzador. Sin `--transport-version` baja el Bifrost más reciente, que el 2026-10-13 era v2.3.0. Esa versión exige virtual key y rompe esta config sin governance. Por eso el flag va en todos los comandos del kit. No lo quites.
 - Las llaves van solo por variables de entorno, nunca dentro del JSON.
 - El delegate ejecuta comandos de shell en tu carpeta de trabajo sin sandbox: usalo con agentes de confianza.
 - Esquema de config de Bifrost: https://github.com/maximhq/bifrost/blob/main/transports/config.schema.json
