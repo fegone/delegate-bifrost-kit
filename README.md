@@ -5,20 +5,21 @@ Kit para correr el delegate de Claude Code (MCP `delegate-local`) contra **Bifro
 Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit lo fija al commit `e43f506078fd95de82bbd3613aea0c789cefb05b`.
 
 ## Requisitos
-- Windows 11 con WSL2 (Windows nativo no funciona, ver Novedades)
+- macOS en Apple Silicon (`macos/README.md`) o Windows 11 con WSL2 (`wsl/README.md`). Windows nativo no funciona, ver Novedades
 - Node 20+ o Docker Desktop, para Bifrost
 - Python 3.11+
-- Git for Windows o WSL2
+- git
 - Claude Code instalado
 
 ## Arranque rapido
 1. Clona este repo y copia `.env.example` a `.env`; pon tus llaves (ZAI_API_KEY, DEEPSEEK_API_KEY).
 2. Copia `bifrost/config.example.json` a `bifrost/config.json` y ajusta el slot generico si lo vas a usar.
-3. WSL2 (recomendado): sigue `wsl/README.md`. Windows nativo: en PowerShell 7 corre `windows/install.ps1`.
+3. macOS (Apple Silicon): sigue `macos/README.md` (o corre `bash macos/install.sh`). Windows: usa WSL2 con `wsl/README.md`. Windows nativo no funciona.
 4. Pega en Claude Code el comando `claude mcp add` que te imprime el instalador y reinicia Claude Code.
 5. Pidele a Claude Code que use `delegate_to_local_agent` con el modelo `glm-coding-plan` y confirma que responde.
 
 ## Novedades del 2026-10-13
+- Hay ruta para macOS (Apple Silicon): `macos/README.md` y `macos/install.sh`.
 - El delegate sube de `916fff0` a `e43f506`. Se instala igual, con las mismas dependencias (`fastmcp`, `httpx`) y las mismas variables. No hay variables nuevas obligatorias.
 - **Windows nativo no funciona.** El delegate importa `fcntl`, que solo existe en Linux y macOS, y en Windows nativo el MCP se cae al arrancar. Esto ya pasaba con el commit anterior. Usa WSL2 (`wsl/README.md`). `windows/install.ps1` queda en el repo, pero no lo uses hasta nuevo aviso.
 - Hay seis herramientas nuevas que **puedes ignorar**. `submit_codex`, `poll_codex` y `cancel_codex` trabajan con el Codex CLI y un plan de ChatGPT. Sin el CLI responden "codex binary no encontrado". `submit_dsh`, `poll_dsh` y `cancel_dsh` necesitan un lanzador que este kit no trae y responden que la lista de modelos no está disponible. Ninguna impide que el delegate arranque. Lo tuyo sigue siendo `delegate_to_local_agent` y `delegate_batch`.
