@@ -27,7 +27,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-grep -q "$SHA" "$KIT/windows/install.ps1" "$KIT/wsl/README.md" "$KIT/README.md" \
+grep -q "$SHA" "$KIT/windows/install.ps1" "$KIT/wsl/README.md" "$KIT/macos/README.md" "$KIT/macos/install.sh" "$KIT/README.md" \
   || { echo "FAIL: pinned sha out of sync in the kit"; exit 1; }
 
 echo "== delegate @ ${SHA:0:7}"
