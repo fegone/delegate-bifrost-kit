@@ -2,7 +2,7 @@
 
 Kit para correr el delegate de Claude Code (MCP `delegate-local`) contra **Bifrost oficial** (maximhq/bifrost) en vez de LiteLLM. Claude Code le manda tareas a modelos como GLM y DeepSeek, y Bifrost hace de puerta local en 127.0.0.1.
 
-Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit lo fija al commit `e43f506078fd95de82bbd3613aea0c789cefb05b`.
+Delegate: https://github.com/fegone/claude-code-delegate-local (MIT). Este kit lo fija al commit `25dbf8d511ebc87a84e8f49098e91ddbb934f9b3`.
 
 Para qué sirve el delegate, qué modelos van por Bifrost y cuáles no, y cómo agregar otro modelo: `GUIA.md`.
 
@@ -22,9 +22,10 @@ Para qué sirve el delegate, qué modelos van por Bifrost y cuáles no, y cómo 
 
 ## Novedades del 2026-10-13
 - Hay ruta para macOS (Apple Silicon): `macos/README.md` y `macos/install.sh`.
-- El delegate sube de `916fff0` a `e43f506`. Se instala igual, con las mismas dependencias (`fastmcp`, `httpx`) y las mismas variables. No hay variables nuevas obligatorias.
+- El delegate sube de `916fff0` a `25dbf8d`. Se instala igual, con las mismas dependencias (`fastmcp`, `httpx`) y las mismas variables. No hay variables nuevas obligatorias.
 - **Windows nativo no funciona.** El delegate importa `fcntl`, que solo existe en Linux y macOS, y en Windows nativo el MCP se cae al arrancar. Esto ya pasaba con el commit anterior. Usa WSL2 (`wsl/README.md`). `windows/install.ps1` queda en el repo, pero no lo uses hasta nuevo aviso.
 - Hay seis herramientas nuevas que **puedes ignorar**. `submit_codex`, `poll_codex` y `cancel_codex` trabajan con el Codex CLI y un plan de ChatGPT. Sin el CLI responden "codex binary no encontrado". `submit_dsh`, `poll_dsh` y `cancel_dsh` necesitan un lanzador que este kit no trae y responden que la lista de modelos no está disponible. Ninguna impide que el delegate arranque. Lo tuyo sigue siendo `delegate_to_local_agent` y `delegate_batch`.
+- Arreglos que reportó Edgar, en `25dbf8d`. `delegate_batch` manda un latido cada 20 s y una tarea cancelada ya no tumba el lote. `DELEGATE_BATCH_TASK_TIMEOUT=0` quita el límite. `delegate_to_provider` solo acepta loopback si no defines `DELEGATE_PROVIDER_ALLOWED_HOSTS`. Las herramientas de dsh quedan apagadas sin `DELEGATE_DSH_LAUNCHER`. `DELEGATE_FAILOVER=0` apaga el cambio automático de modelo.
 - `DELEGATE_GATEWAY_FILE` es opcional y no la necesitas. Sigue con `DELEGATE_GATEWAY=bifrost` como hasta ahora.
 - Bifrost se queda en npm `1.6.3` y Docker `v2.2.4`, la versión más nueva con 14 días o más de publicada. La config de ejemplo no cambia. El comando npx ahora lleva `--transport-version v2.2.4` (detalle en Notas).
 

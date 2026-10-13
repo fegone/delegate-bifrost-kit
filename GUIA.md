@@ -36,7 +36,7 @@ Hay dos formas de usar Gemini con el delegate.
 
 **Con llave de API.** Se crea una llave en Google AI Studio y se agrega Gemini como proveedor en Bifrost (sección siguiente). Se paga por uso y no entra en la suscripción de Google.
 
-**Con la suscripción, por el CLI de Antigravity (`agy`).** Desde el commit `ff4b4a5` el delegate trae `delegate_to_gemini`, `submit_gemini`, `poll_gemini` y `cancel_gemini`, que corren Gemini 3.8 Flash (low, medium o high) con tu plan de Google.
+**Con la suscripción, por el CLI de Antigravity (`agy`).** Desde el commit `ff4b4a5` (este kit fija `25dbf8d`) el delegate trae `delegate_to_gemini`, `submit_gemini`, `poll_gemini` y `cancel_gemini`, que corren Gemini 3.8 Flash (low, medium o high) con tu plan de Google.
 
 1. Instala el CLI con `brew install --cask antigravity-cli`. Revisa la firma con `spctl -a -vv -t open --context context:primary-signature "$(readlink -f "$(which agy)")"`. En nuestra Mac la versión 1.3.3 salió firmada por Google pero sin notarizar y macOS la bloqueó al abrirla. En la Mac de Edgar salió notarizada. Si te la bloquea, la decisión de abrirla es tuya.
 2. Corre `agy` una vez en una terminal y entra con tu cuenta de Google. `agy models` tiene que listar `gemini-3.8-flash-low`.

@@ -21,12 +21,12 @@ Las llaves van solo en `.env`, nunca dentro del JSON. Nunca subas `.env` a git.
 ```bash
 bash macos/install.sh
 ```
-El script clona el delegate en la carpeta `delegate/` fijado al commit `e43f506078fd95de82bbd3613aea0c789cefb05b`, crea `.venv/` e instala `fastmcp` y `httpx`. No pide sudo, no lee tus llaves y se puede correr varias veces. Al final imprime el comando `claude mcp add` listo para pegar (paso 5).
+El script clona el delegate en la carpeta `delegate/` fijado al commit `25dbf8d511ebc87a84e8f49098e91ddbb934f9b3`, crea `.venv/` e instala `fastmcp` y `httpx`. No pide sudo, no lee tus llaves y se puede correr varias veces. Al final imprime el comando `claude mcp add` listo para pegar (paso 5).
 
 Si prefieres hacerlo a mano, estos son los pasos.
 ```bash
 git clone https://github.com/fegone/claude-code-delegate-local.git delegate
-git -C delegate checkout e43f506078fd95de82bbd3613aea0c789cefb05b
+git -C delegate checkout 25dbf8d511ebc87a84e8f49098e91ddbb934f9b3
 python3 -m venv .venv && . .venv/bin/activate
 pip install "fastmcp>=3.4.4" "httpx>=0.28.1"
 ```
